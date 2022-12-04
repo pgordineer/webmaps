@@ -1,9 +1,4 @@
 <!DOCTYPE HTML>
-<!--
-	Astral by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>Explorations in Geosciences</title>
@@ -11,9 +6,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 	</head>
 	<body class="is-preload">
-
+		<script>
+			function closeDetail(detailsElement) {
+				detailsElement.removeAttribute("open");
+				window.location = '#' + detailsElement.id;
+			}
+		</script>
 		<!-- Wrapper-->
 			<div id="wrapper">
 
@@ -48,25 +50,65 @@
 								<p>
 									Welcome to my project demonstrating an optimization for routing plugging equipment from a roadway to an abandoned well.
 								</p>
-									<details>
-										<summary>
-									  	Click to open map legend
-									  	<span class="fa fa-arrow-down"></i></span>
-										</summary>
-										<section>
-											<div class="row">
-												<article class="col-5 col-7-medium col-13-small">
-													<a href="images/legend.jpg" class="image fit"><img src="images/legend.jpg" title="Legend" alt="" /></a>
-												</article>
-											</div>
-										</section>
-								  	</details>
-						 	</article>
+							 <details id="mapdetails">
+								<summary>
+								  Click to open mapping project
+								  <span class="fa fa-arrow-down"></i></span>
+								</summary>
 								<section>
-									<div class="row">
-										<iframe width='100%' height='600px' src="https://api.mapbox.com/styles/v1/pgordineer/cl9m4mo03003e15khcpjlarpg.html?title=false&access_token=pk.eyJ1IjoicGdvcmRpbmVlciIsImEiOiJjbDgyZXJuN2YwNGg4M3h1b2ozc2Z4cHdlIn0.teC_VS396cqCs4GSU4papQ&zoomwheel=true#12.33/40.48173/-79.65043" title="PluggingRoutes" style="border:none;"></iframe>
-									</div>
+									<style>
+										.legend {
+										background-color: #fff;
+										border-radius: 3px;
+										bottom: 350px;
+										box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+										font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+										padding: 10px;
+										position: absolute;
+										right: 80px;
+										z-index: 1;
+										}
+										 
+										.legend h4 {
+										margin: 0 0 10px;
+										}
+										 
+										.legend div span {
+										border-radius: 50%;
+										display: inline-block;
+										height: 10px;
+										margin-right: 5px;
+										width: 10px;
+										}
+										</style>
+
+										<div id="state-legend" class="legend">
+										<h4>Well Type</h4>
+										<div><span style="background-color: #723122"></span>Abandoned Oil & Gas</div>
+										<div><span style="background-color: #8b4225"></span>Abandoned Oil</div>
+										<div><span style="background-color: #a25626"></span>Abandoned Gas</div>
+										<div><span style="background-color: #b86b25"></span>5,000,000</div>
+										<div><span style="background-color: #ca8323"></span>2,500,000</div>
+										<div><span style="background-color: #da9c20"></span>1,000,000</div>
+										<div><span style="background-color: #e6b71e"></span>750,000</div>
+										<div><span style="background-color: #eed322"></span>500,000</div>
+										<div><span style="background-color: #f2f12d"></span>0</div>
+										</div>
+
+									<div  id='map' style='width: 100%; height: 600px;'></div>
+									<script>
+  										mapboxgl.accessToken = 'pk.eyJ1IjoicGdvcmRpbmVlciIsImEiOiJjbGI3ZGQ2em4wYTYzM3VxajQ4N3ZqdHFxIn0.I9piBBRsoGa6BHBel3KVsw';
+  										var map = new mapboxgl.Map({
+										container: 'map',
+										style: 'mapbox://styles/pgordineer/cl9m4mo03003e15khcpjlarpg'
+										});
+									</script>
+									<p6>
+										Tip: Right click pan to view in 3-d (Mobile users two-finger drag)
+									</p6>
 								</section>
+								<button onclick="closeDetail(this.parentElement)">Click to close mapping project<span class="fa fa-arrow-up"></i></span></button>
+							  </details>
 								<details>
 									<summary>
 									  Click to view data table
@@ -75,6 +117,17 @@
 									<section>
 										<div class="row">
 											<embed width='100%' height='600px' src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSsDntG3PZ38bS7a-2HsPiyjfELm0flrMdcYYEawMpPLY94G7LPgbLtRIVT6fZVRA/pubhtml?widget=true&amp;headers=false" title="TablePlugging" style="border:none;"></embed>
+										</div>
+									</section>
+								  </details>
+								  <details>
+									<summary>
+									  Click to view iframe implementation
+									  <span class="fa fa-arrow-down"></i></span>
+									</summary>
+									<section>
+										<div class="row">
+											<iframe width='100%' height='600px' src="https://api.mapbox.com/styles/v1/pgordineer/cl9m4mo03003e15khcpjlarpg.html?title=false&access_token=pk.eyJ1IjoicGdvcmRpbmVlciIsImEiOiJjbDgyZXJuN2YwNGg4M3h1b2ozc2Z4cHdlIn0.teC_VS396cqCs4GSU4papQ&zoomwheel=true#12.33/40.48173/-79.65043" title="PluggingRoutes" style="border:none;"></iframe>
 										</div>
 									</section>
 								  </details>
