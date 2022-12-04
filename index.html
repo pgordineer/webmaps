@@ -16,6 +16,7 @@
 				window.location = '#' + detailsElement.id;
 			}
 		</script>
+		
 		<!-- Wrapper-->
 			<div id="wrapper">
 
@@ -56,6 +57,37 @@
 								  <span class="fa fa-arrow-down"></i></span>
 								</summary>
 								<section>
+									<script>
+
+										var button_beg = '<button id="button" onclick="showhide()">', button_end = '</button>';
+										var show_button = 'Show Legend', hide_button = 'Hide Legend';
+										function showhide() {
+											var div = document.getElementById( "hide_show" );
+											var showhide = document.getElementById( "showhide" );
+											if ( div.style.display !== "none" ) {
+												div.style.display = "none";
+												button = show_button;
+												showhide.innerHTML = button_beg + button + button_end;
+											} else {
+												div.style.display = "block";
+												button = hide_button;
+												showhide.innerHTML = button_beg + button + button_end;
+											}
+										}
+										function setup_button( status ) {
+											if ( status == 'Show Legend' ) {
+												button = hide_button;
+											} else {
+												button = show_button;
+											}
+											var showhide = document.getElementById( "showhide" );
+											showhide.innerHTML = button_beg + button + button_end;
+										}
+										window.onload = function () {
+											setup_button( 'Hide Legend' );
+											showhide(); // if setup_button is set to 'show' comment this line
+										}
+									</script>
 									<style>
 										.legend {
 										background-color: #fff;
@@ -81,19 +113,22 @@
 										width: 10px;
 										}
 										</style>
-
-										<div id="state-legend" class="legend">
-										<h4>Well Type</h4>
-										<div><span style="background-color: #723122"></span>Abandoned Oil & Gas</div>
-										<div><span style="background-color: #8b4225"></span>Abandoned Oil</div>
-										<div><span style="background-color: #a25626"></span>Abandoned Gas</div>
-										<div><span style="background-color: #b86b25"></span>5,000,000</div>
-										<div><span style="background-color: #ca8323"></span>2,500,000</div>
-										<div><span style="background-color: #da9c20"></span>1,000,000</div>
-										<div><span style="background-color: #e6b71e"></span>750,000</div>
-										<div><span style="background-color: #eed322"></span>500,000</div>
-										<div><span style="background-color: #f2f12d"></span>0</div>
+										<div id="showhide"></div>
+										<div id="hide_show">
+											<div id="state-legend" class="legend">
+												<h4>Well Type</h4>
+												<div><span style="background-color: #723122"></span>Abandoned Oil & Gas</div>
+												<div><span style="background-color: #8b4225"></span>Abandoned Oil</div>
+												<div><span style="background-color: #a25626"></span>Abandoned Gas</div>
+												<div><span style="background-color: #b86b25"></span>5,000,000</div>
+												<div><span style="background-color: #ca8323"></span>2,500,000</div>
+												<div><span style="background-color: #da9c20"></span>1,000,000</div>
+												<div><span style="background-color: #e6b71e"></span>750,000</div>
+												<div><span style="background-color: #eed322"></span>500,000</div>
+												<div><span style="background-color: #f2f12d"></span>0</div>
+												</div>
 										</div>
+										
 
 									<div  id='map' style='width: 100%; height: 600px;'></div>
 									<script>
